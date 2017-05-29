@@ -22,3 +22,5 @@ To stop test from executing press 'c' on your shell or command prompt.
  -----------------------------------------------------------------------------------------------------------------------------------------------------
 
  loginUrls and credentials are stored as an object in lib/getEnvConf.js file. Any modification should be made in the aforementioned file.
+ 
+ There is an existing issue with the latest gecko driver and mozilla firefox version 51+. The tests may run on older versions of firefox/
