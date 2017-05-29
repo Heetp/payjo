@@ -1,0 +1,19 @@
+{
+  "name": "flipkarte2e",
+  "version": "1.0.0",
+  "description": "Automation task for Red Panda Innovation Labs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "npm install",
+    "webdriver-manager:update":"node node_modules/protractor/bin/webdriver-manager update",
+    "e2e:stage": "node node_modules/protractor/bin/protractor config/conf.js --params.env \"STAGE\"",
+    "e2e:uat": "node node_modules/protractor/bin/protractor config/conf.js --params.env='UAT'",
+    "e2e:prod": "node node_modules/protractor/bin/protractor config/conf.js --params.env='PROD'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "protractor": "^5.1.2"
+  }
+}
