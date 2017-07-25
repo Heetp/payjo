@@ -1,4 +1,4 @@
-This document describes how to setup and run protractor test for this project. We expect you to have nodejs installed(>6.9.0) in yout machine
+This document describes how to setup and run protractor test for this project. We expect you to have nodejs installed(>6.9.0) in your machine
 
 
 To Setup, open a shell or command prompt and change the current directory to FlipkartE2E.
