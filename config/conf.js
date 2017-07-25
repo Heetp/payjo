@@ -1,4 +1,5 @@
 let envConfig = require("./../lib/getEnvConf.js");
+let jasmineSpecReporter = require("jasmine-spec-reporter").SpecReporter
 // An example configuration file.
 exports.config = {
   directConnect: true,
@@ -25,10 +26,15 @@ exports.config = {
     }
     browser.baseUrl = selectedConf.baseUrl;
     browser.params.phoneNumber = selectedConf.phoneNumber;
-    browser.params.password = selectedConf.password
+    browser.params.password = selectedConf.password;
+    jasmine.getEnv().addReporter(new jasmineSpecReporter({
+      spec: {
+        displayStacktrace: true
+      }
+    }));
   },
   onComplete: () =>{
-    browser.pause();
+    //browser.pause();
   },
   // Spec patterns are relative to the current working directory when
   // protractor is called.

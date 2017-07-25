@@ -1,10 +1,12 @@
-var loginPage = require("./../lib/pages/loginPage.js");
-var productCategories = require("./../lib/pages/productCategories.js");
-var searchBox = require("./../lib/pages/searchBox.js");
-var mobilePage = require("./../lib/pages/mobilePage.js");
-var productPage =  require("./../lib/pages/productPage.js")
+let loginPage = require("./../lib/pages/loginPage.js");
+let productCategories = require("./../lib/pages/productCategories.js");
+let searchBox = require("./../lib/pages/searchBox.js");
+let mobilePage = require("./../lib/pages/resultPage.js");
+let productPage =  require("./../lib/pages/productPage.js")
+let cartPage = require("./../lib/pages/cartPage.js");
 
 describe("Flipkart E2E", () =>{
+  let resultTitle;
   it("Navigate", ()=>{
       loginPage.fNavigate();
   });
@@ -17,43 +19,38 @@ describe("Flipkart E2E", () =>{
       productCategories.fVerifyProductLists();
   });
 
-  it("Navigate to Electronics-> Mobile", ()=>{
-    productCategories.fNavigateSubCategory("ELECTRONICS", "Mobiles")
-  });
-
   it("Search for mobile in the search bar", ()=>{
-    searchBox.fSearchProduct("Mobiles");
+    searchBox.fSearchProduct("Iphone 7");
   });
 
-  it("select 4 GB RAM filter", () =>{
-    mobilePage.filterSearch("RAM","4 GB");
-  });
-
-  it("Verify if 4GB is displayed in the description of the results", () =>{
-    mobilePage.fVerifyResultDescription("4 GB RAM");
-  });
-
-  it("Type moto in the brand filter textbox - Motorola checkbox should appear.Select it", (done)=>{
-    mobilePage.filterSeachTextbox("BRAND", "Moto").then(()=>{
-    mobilePage.filterSearch("BRAND", "Motorola").then(()=>{
+  it("Open the First Link -  The product should be opened in new page'",(done)=>{
+    mobilePage.fClickFirstLink().then((text)=>{
+      resultTitle = text;
       done();
-    });
-    });
-  });
-
-  it("The Results should have only motorola phones",() =>{
-    mobilePage.fVerifyResultTitleContains("Moto");
-  });
-
-  it("Clear the brand filter",(done)=> {
-    mobilePage.fClearFilter("Motorola").then(done);
-  });
-
-  it("Open 'Moto G5 Plus (Lunar Grey, 32 GB)'",()=>{
-    mobilePage.fOpenResultLink("Moto G5 Plus (Lunar Grey, 32 GB)");
+    })
   });
 
   it("Add the mobile to Cart",()=>{
     productPage.fClickAddToCart();
+  });
+
+  it("close the product window", ()=>{
+    productPage.close();
+  });
+
+  it("Click on Cart option", ()=>{
+    cartPage.fClickAddToCartIcon();
+  });
+
+  it("Verify the item added",()=>{
+    cartPage.fVerifyItemPresent(resultTitle);
+  });
+
+  it("Remove the items in cart",()=>{
+    cartPage.fRemoveItems();
+  });
+
+  it("Logout", ()=>{
+    loginPage.fLogout();
   });
 });
